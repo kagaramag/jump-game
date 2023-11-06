@@ -5,8 +5,6 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   strict: true,
   state: {
-    // GAME_SPEED: 0, // 0: initial(8s), 1:(4s) , 2:(500ms)
-    // GAME_LEVEL: 2,
     gameConfig: {
       GAME_SPEED: 5,
       GAME_LEVEL: 1,
@@ -42,7 +40,6 @@ export const store = new Vuex.Store({
         default:
           break;
       }
-      // state.GAME_LEVEL = payload;
     },
   },
 

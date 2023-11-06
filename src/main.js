@@ -3,7 +3,6 @@ import App from "./App.vue";
 import store from "./store";
 import "./assets/css/global.css";
 
-Vue.config.devtools = true;
 Vue.config.productionTip = false;
 
 new Vue({

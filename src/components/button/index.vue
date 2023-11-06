@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 .button {
-  padding: 12px 16px;
+  padding: 8px 16px;
   border-radius: 6px;
   font-weight: 700;
   font-size: 18px;
