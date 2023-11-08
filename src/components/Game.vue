@@ -59,19 +59,19 @@
             <Button
               type="secondary"
               :disabled="getGameConfig.GAME_LEVEL === 1 || !GAME_OVER"
-              @click="updateGameLevel(1)"
+              @click="updateLevel(1)"
               >1</Button
             >
             <Button
               type="secondary"
               :disabled="getGameConfig.GAME_LEVEL === 2 || !GAME_OVER"
-              @click="updateGameLevel(2)"
+              @click="updateLevel(2)"
               >2</Button
             >
             <Button
               type="secondary"
               :disabled="getGameConfig.GAME_LEVEL === 3 || !GAME_OVER"
-              @click="updateGameLevel(3)"
+              @click="updateLevel(3)"
               >3</Button
             >
           </div>
@@ -87,7 +87,7 @@
 
 <script>
 // IMPORT STORE
-import store from "./../store";
+import { mapGetters, mapActions } from "vuex";
 // IMPORT REUSABLE BUTTON COMPONENT
 import Button from "./button";
 export default {
@@ -227,10 +227,6 @@ export default {
         this.characterPosition.y = 0;
       }, this.jumpHangTime());
     },
-    // UPDATE GAME LEVEL(STATE)
-    updateGameLevel(level) {
-      store.dispatch("updateGameLevel", level);
-    },
     // SET TIME(in ms) THE CHARACTER HANGS IN THE AIR
     jumpHangTime() {
       switch (this.getGameConfig.GAME_LEVEL) {
@@ -250,9 +246,16 @@ export default {
       audio.volume = 0.5;
       audio.play();
     },
+    updateLevel(level) {
+      this.updateGameLevel(level);
+    },
+    ...mapActions(["updateGameLevel"]),
   },
   computed: {
-    // ANIMATE OBSTABLE
+    ...mapGetters({
+      getGameConfig: "getGameConfig",
+    }),
+
     obstacleStyle() {
       return {
         left: `${this.obstaclePosition.x}px`,
@@ -264,10 +267,6 @@ export default {
       return {
         bottom: `${this.characterPosition.y}px`,
       };
-    },
-    // GET LEVEL OF THE GAME FROM STORE
-    getGameConfig() {
-      return store.getters.getGameConfig;
     },
   },
 };
